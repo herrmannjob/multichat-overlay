@@ -1,0 +1,212 @@
+:root {
+  --bg: transparent; /* Overlay background always transparent */
+  
+  /* ZELDA INSPIRED PALETTE */
+  --z-forest: #0a2e1d;   /* Deep Dark Green */
+  --z-grass: #2cc972;    /* Vibrant Hero Green */
+  --z-light: #d4ffd6;    /* Soft Light Green (replaces yellow) */
+  --z-spirit: #8cffb4;   /* Glow Green */
+  
+  /* Typography */
+  --font-main: 'Inter', 'Noto Color Emoji', sans-serif;
+  --font-head: 'Fredoka', sans-serif; /* Playful headers */
+  --base-size: 16px;
+
+  /* Theme mappings */
+  --color-bg-card: rgba(10, 46, 29, 0.9); /* Dark Forest Glass */
+  --color-border: var(--z-grass);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: var(--z-light);
+  
+  --shadow-sm: 0 4px 0 rgba(0,0,0,0.2); /* Retro chunky shadow */
+  --shadow-glow: 0 0 15px rgba(44, 201, 114, 0.4);
+
+  /* Layout */
+  --widget-width: 500px;
+}
+
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);
+  font-family: var(--font-main);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  font-size: var(--base-size);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#messages {
+  width: var(--widget-width);
+  max-width: 100vw;
+  height: 100%;
+  padding: 1.5rem;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+   /* Gradient mask so top messages fade into the forest */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+}
+
+/* Message Card */
+.message {
+  display: flex;
+  align-items: flex-end; /* Align avatar bottom with bubble */
+  gap: 0.75rem;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Bouncy pop */
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  transform-origin: bottom left;
+  max-width: 90%;
+}
+
+@keyframes popIn {
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Avatar - Rounded Square ("Rupeeish" feel) */
+.avatar {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 3px solid var(--z-grass);
+  background: var(--z-forest);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+  z-index: 2;
+}
+.message:hover .avatar {
+  transform: translateY(-4px) rotate(-5deg);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: var(--font-head);
+  color: var(--z-light);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Bubble */
+.bubble {
+  position: relative;
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: 20px 20px 20px 4px; /* Distinctive shape */
+  padding: 0.8rem 1.1rem;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.3); /* Retro styling */
+  min-width: 0;
+  backdrop-filter: blur(4px);
+}
+
+/* Little tail tweak if needed, but border radius does the job */
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap; 
+}
+
+.name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--z-spirit);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.5); /* Retro 3D text */
+}
+
+/* Platforms */
+.platform {
+  width: 20px;
+  height: 20px;
+  color: white;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.3));
+  opacity: 0.9;
+}
+.platform svg { width: 100%; height: 100%; fill: currentColor; }
+.platform--twitch { color: #a970ff; }
+.platform--youtube { color: #ff5555; }
+.platform--kick { color: #53fc18; }
+.platform__label { display: none !important; }
+
+/* Badges */
+.badges {
+  display: flex;
+  gap: 4px;
+}
+.badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  font-weight: 800;
+  background: rgba(0,0,0,0.2);
+  color: var(--z-light);
+  border: 1px solid rgba(255,255,255,0.1);
+  letter-spacing: 0.05em;
+}
+/* Badge Colors */
+.badge--broadcaster { background: #e91916; color: white; border: none; }
+.badge--mod { background: #00ad03; color: white; border: none; }
+.badge--vip { background: #e005b9; color: white; border: none; }
+.badge--sub { background: #5d0085; color: white; border: 1px solid #9c32cc; } /* Deep Purple */
+.badge--prime { background: #00a0d6; color: white; border: none; } /* Prime Blue */
+.badge--bits { background: #bd0f5c; color: white; }
+.badge--founder { background: #d4283c; color: white; }
+.badge--verified { background: #9146FF; color: white; } /* Twitch Verified Purple */
+
+/* Text Body */
+.text {
+  color: white;
+  font-weight: 600;
+  line-height: 1.45;
+  font-size: 1.05rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Emotes */
+.emote {
+  height: 2rem;
+  vertical-align: middle;
+  margin: -0.3em 0.2em;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition: transform 0.2s;
+}
+.emote:hover { transform: scale(1.3) rotate(5deg); }
+
+/* Highlights / Events */
+.message--highlight .bubble {
+  border-color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.message--type-superchat .bubble {
+  background: linear-gradient(135deg, #a80000 0%, #5e0000 100%);
+  border-color: #ffaa00;
+}
+
+.titlebar { display: none; }

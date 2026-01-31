@@ -1,0 +1,24 @@
+{
+  "name": "multichat-overlay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "NODE_ENV=development node server/index.js",
+    "emotes:twitch": "node scripts/fetch-twitch-emotes.cjs --login souherrmann",
+    "emotes:twitch:dl": "node scripts/fetch-twitch-emotes.cjs --login souherrmann --download",
+    "emotes:kick": "node scripts/fetch-kick-emotes.cjs --slug souherrmann",
+    "emotes:kick:dl": "node scripts/fetch-kick-emotes.cjs --slug souherrmann --download"
+  },
+  "dependencies": {
+    "@retconned/kick-js": "^0.5.4",
+    "dotenv": "17.2.3",
+    "express": "5.2.1",
+    "googleapis": "170.1.0",
+    "tiktok-live-connector": "2.1.0",
+    "tmi.js": "^1.8.5",
+    "ws": "^8.19.0",
+    "youtube-chat": "^2.2.0"
+  }
+}
