@@ -17,12 +17,8 @@ import { fileURLToPath } from 'node:url';
 
 import { initTwitch } from './platforms/twitch.js';
 import { initYouTube } from './platforms/youtube.js';
-// import { initKick } from './platforms/kick.js';
+import { initKick } from './platforms/kick.js';
 import { initTikTok } from './platforms/tiktok.js';
-
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const { initKick } = require('./platforms/kick.cjs'); // <-- CJS aqui
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -138,17 +138,18 @@ function renderParts(container, parts, fallbackText) {
   }
 
   parts.forEach((part) => {
-    if (part.type === "emote" || part.type === "emoji") {
+    const label = part.alt || part.text || "";
+    if ((part.type === "emote" || part.type === "emoji") && part.url) {
       const img = new Image();
       img.src = part.url;
-      img.alt = part.text;
-      img.title = part.text;
+      img.alt = label;
+      img.title = label;
       img.className = "emote";
       container.appendChild(img);
     } else {
       // type 'text' or unknown
       const span = document.createElement("span");
-      span.textContent = part.text;
+      span.textContent = label || part.text || "";
       container.appendChild(span);
     }
   });
@@ -289,4 +290,3 @@ startSocket();
 
 // For testing purposes
 window.testMessage = renderMessage;
-
